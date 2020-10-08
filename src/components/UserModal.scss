@@ -1,0 +1,15 @@
+#circle {
+  background: #a9c0ff;
+  border-radius: 50%;
+  width: 175px;
+  height: 175px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  font-weight: 500;
+}
+
+ion-modal.modal {
+  --min-height: 90%;
+}

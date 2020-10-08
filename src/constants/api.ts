@@ -1,5 +1,5 @@
 export const API = {
-  BASE: "localhost:8080/api",
+  BASE: "https://dathena-assignment-api.herokuapp.com/api",
 
   // Users
   USERS: "/users",

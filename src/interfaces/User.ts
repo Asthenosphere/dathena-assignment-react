@@ -1,14 +1,14 @@
 export interface User {
-  id: number | null;
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  dob: Date | null;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  dob: Date;
 }
 
 export interface UserDetails {
   firstName: string;
   lastName: string;
   email: string;
-  dob: Date;
+  dob: number;
 }

@@ -17,10 +17,8 @@ import {
   logOutSharp,
   peopleOutline,
   peopleSharp,
-  trashOutline,
-  trashSharp,
 } from "ionicons/icons";
-import "./Menu.css";
+import "./Menu.scss";
 
 interface AppPage {
   url: string;
@@ -35,12 +33,6 @@ const appPages: AppPage[] = [
     url: "/page/users",
     iosIcon: peopleOutline,
     mdIcon: peopleSharp,
-  },
-  {
-    title: "Deleted",
-    url: "/page/deleted",
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
   },
   {
     title: "Log Out",

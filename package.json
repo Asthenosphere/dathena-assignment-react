@@ -18,6 +18,8 @@
     "axios": "^0.20.0",
     "ionicons": "^5.0.0",
     "json-server": "^0.16.2",
+    "moment": "^2.29.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",

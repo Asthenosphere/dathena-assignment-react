@@ -4,6 +4,7 @@ import {
   DELETE_USER_ERROR,
   NEW_USER_ERROR,
   USERS_ERROR,
+  UPDATE_USER_ERROR,
 } from "../constants/errors";
 import { UserDetails, User } from "../interfaces/User";
 
@@ -11,7 +12,7 @@ export const getUsers = async (): Promise<User[]> => {
   return await axios
     .get(API.BASE + API.USERS)
     .then((response: AxiosResponse) => {
-      const { users } = response.data;
+      const users = response.data;
       if (response.status === 200) {
         return users as User[];
       }
@@ -32,18 +33,21 @@ export const createUser = async (details: UserDetails): Promise<void> => {
       throw new Error(NEW_USER_ERROR);
     })
     .catch((error: AxiosError | Error) => {
-      throw error;
+      throw new Error(NEW_USER_ERROR);
     });
 };
 
-export const updateUser = async (details: UserDetails): Promise<void> => {
+export const updateUser = async (
+  details: UserDetails,
+  id: string
+): Promise<void> => {
   return await axios
-    .post(API.BASE + API.UPDATE_USER, details)
+    .post(`${API.BASE + API.UPDATE_USER}/${id}`, details)
     .then((response: AxiosResponse) => {
       if (response.status === 200) {
         return;
       }
-      throw new Error(NEW_USER_ERROR);
+      throw new Error(UPDATE_USER_ERROR);
     })
     .catch((error: AxiosError | Error) => {
       throw error;
