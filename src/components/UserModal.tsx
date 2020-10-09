@@ -53,6 +53,12 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     user ? user.firstName : ""
   );
   const [lastName, setLastName] = useState<string>(user ? user.lastName : "");
+  const [savedFirstName, setSavedFirstName] = useState<string>(
+    user ? user.firstName : ""
+  );
+  const [savedLastName, setSavedLastName] = useState<string>(
+    user ? user.lastName : ""
+  );
   const [email, setEmail] = useState<string>(user ? user.email : "");
   const [dob, setDob] = useState<string>(
     user ? new Date(user.dob).toString() : Date.now().toString()
@@ -90,7 +96,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     );
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     loadingCallback(true);
     const userObject = {
       firstName: firstName,
@@ -99,9 +105,11 @@ const UserModal: React.FC<UserDetailsModalProps> = (
       dob: new Date(dob).getTime(),
     };
     try {
-      updateUser(userObject, user.id.toString());
+      await updateUser(userObject, user.id.toString());
       userCallback();
       setIsUpdated(true);
+      setSavedFirstName(firstName);
+      setSavedLastName(lastName);
       setTimeout(() => {
         loadingCallback(false);
         alertCallback(
@@ -176,12 +184,12 @@ const UserModal: React.FC<UserDetailsModalProps> = (
       </IonHeader>
       <IonContent>
         <IonRow class='ion-padding ion-justify-content-center'>
-          {user && user.lastName && <div id='circle'>{user.lastName[0]}</div>}
+          {user && savedLastName && <div id='circle'>{savedLastName[0]}</div>}
         </IonRow>
         <IonRow class='ion-padding ion-justify-content-center'>
           {user && (
             <IonText style={{ fontWeight: "bold" }}>
-              {user.firstName + " " + user.lastName}
+              {savedFirstName + " " + savedLastName}
             </IonText>
           )}
         </IonRow>
