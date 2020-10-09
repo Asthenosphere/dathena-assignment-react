@@ -20,7 +20,7 @@ import {
 } from "@ionic/react";
 
 import "./UserModal.scss";
-import { documentTextOutline, pencil } from "ionicons/icons";
+import { pencil } from "ionicons/icons";
 import { deleteUser, updateUser } from "../services/userService";
 import { isValidEmail } from "../utils/validationUtils";
 
@@ -128,7 +128,11 @@ const UserModal: React.FC<UserDetailsModalProps> = (
 
   const validateInputs = () => {
     return (
-      firstName.length > 0 && lastName.length > 0 && isValidEmail(email) && dob
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      firstName.trim().length !== 0 &&
+      isValidEmail(email) &&
+      dob
     );
   };
 
@@ -209,12 +213,18 @@ const UserModal: React.FC<UserDetailsModalProps> = (
           <IonLabel>
             <IonText style={{ fontWeight: "bold" }}>User Details</IonText>
           </IonLabel>
-          <IonIcon icon={documentTextOutline} slot='end'></IonIcon>
         </IonItem>
         <IonGrid class='ion-padding'>
           <IonList>
             <IonItem>
-              <IonLabel color='primary' position='floating'>
+              <IonLabel
+                color={
+                  firstName.length > 0 && firstName.trim().length === 0
+                    ? "danger"
+                    : "primary"
+                }
+                position='floating'
+              >
                 First Name
               </IonLabel>
               <IonInput
@@ -227,7 +237,14 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               />
             </IonItem>
             <IonItem>
-              <IonLabel color='primary' position='floating'>
+              <IonLabel
+                color={
+                  firstName.length > 0 && firstName.trim().length === 0
+                    ? "danger"
+                    : "primary"
+                }
+                position='floating'
+              >
                 Last Name
               </IonLabel>
               <IonInput

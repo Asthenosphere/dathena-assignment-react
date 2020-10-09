@@ -101,7 +101,11 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
 
   const validateInputs = () => {
     return (
-      firstName.length > 0 && lastName.length > 0 && isValidEmail(email) && dob
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      firstName.trim().length !== 0 &&
+      isValidEmail(email) &&
+      dob
     );
   };
 
@@ -125,7 +129,14 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
         <IonGrid class='ion-padding'>
           <IonList>
             <IonItem>
-              <IonLabel color='primary' position='floating'>
+              <IonLabel
+                color={
+                  firstName.length > 0 && firstName.trim().length === 0
+                    ? "danger"
+                    : "primary"
+                }
+                position='floating'
+              >
                 First Name
               </IonLabel>
               <IonInput
@@ -136,7 +147,14 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
               />
             </IonItem>
             <IonItem>
-              <IonLabel color='primary' position='floating'>
+              <IonLabel
+                color={
+                  firstName.length > 0 && firstName.trim().length === 0
+                    ? "danger"
+                    : "primary"
+                }
+                position='floating'
+              >
                 Last Name
               </IonLabel>
               <IonInput

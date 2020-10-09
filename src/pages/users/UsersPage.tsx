@@ -43,6 +43,7 @@ interface UsersPageState {
 }
 
 const UsersPage: React.FC = () => {
+  // State of the users page.
   const [state, setState] = useReducer(
     (s: UsersPageState, a: Partial<UsersPageState>) => ({
       ...s,
@@ -68,6 +69,7 @@ const UsersPage: React.FC = () => {
     }
   );
 
+  // Fetch all users from server.
   const fetchData = async () => {
     try {
       const allUsers = await getUsers();
@@ -85,14 +87,17 @@ const UsersPage: React.FC = () => {
     }
   };
 
+  // Callback function for child components to update.
   const userCallback = () => {
     fetchData();
   };
 
+  // Callback function to update loading spinner.
   const loadingCallback = (status: boolean) => {
     setState({ isLoading: status });
   };
 
+  // Callback function to update Alert.
   const alertCallback = (
     header: string,
     message: string,
@@ -108,10 +113,13 @@ const UsersPage: React.FC = () => {
     });
   };
 
+  // Fetch users upon landing.
   useEffect(() => {
     fetchData();
   }, []);
 
+  // Filtered list of users based on search text entered.
+  // The matching is based on the matching of keywords present in first name, last name and email.
   const filteredUsers =
     state.searchText.length > 0
       ? state.users.filter((x) => {
