@@ -1,6 +1,5 @@
 import {
   IonAlert,
-  IonButton,
   IonButtons,
   IonContent,
   IonFab,
@@ -31,9 +30,11 @@ interface UsersPageState {
   users: User[];
   currentUser: User | null;
   isAlertVisible: boolean;
+  hasConfirm: boolean;
   alertHeader: string;
   alertMessage: string;
   alertHandler: () => void;
+  confirmHandler: () => void;
   isUserModalVisible: boolean;
   isUserFormVisible: boolean;
   isLoading: boolean;
@@ -49,9 +50,15 @@ const UsersPage: React.FC = () => {
       users: [],
       currentUser: null,
       isAlertVisible: false,
+      hasConfirm: false,
       alertHeader: "",
       alertMessage: "",
-      alertHandler: () => {},
+      alertHandler: () => {
+        setState({ isAlertVisible: false });
+      },
+      confirmHandler: () => {
+        setState({ isAlertVisible: false });
+      },
       isUserModalVisible: false,
       isUserFormVisible: false,
       isLoading: true,
@@ -68,7 +75,9 @@ const UsersPage: React.FC = () => {
         alertHeader: "Error",
         alertMessage: "There was a problem fetching the users.",
         isAlertVisible: true,
-        alertHandler: () => {},
+        alertHandler: () => {
+          setState({ isAlertVisible: false });
+        },
       });
     }
   };
@@ -84,13 +93,15 @@ const UsersPage: React.FC = () => {
   const alertCallback = (
     header: string,
     message: string,
-    handler: () => void
+    hasConfirm: boolean,
+    confirmHandler: () => void
   ) => {
     setState({
       alertHeader: header,
       alertMessage: message,
-      alertHandler: handler,
+      hasConfirm: hasConfirm,
       isAlertVisible: true,
+      confirmHandler: confirmHandler,
     });
   };
 
@@ -129,6 +140,7 @@ const UsersPage: React.FC = () => {
           />
         )}
         <UserForm
+          users={state.users}
           isUserFormVisible={state.isUserFormVisible}
           setIsUserFormVisible={(status: boolean) => {
             setState({ isUserFormVisible: status });
@@ -190,12 +202,32 @@ const UsersPage: React.FC = () => {
           header={state.alertHeader}
           message={state.alertMessage}
           backdropDismiss={false}
-          buttons={[
-            {
-              text: "OK",
-              handler: state.alertHandler,
-            },
-          ]}
+          buttons={
+            state.hasConfirm
+              ? [
+                  {
+                    text: "Cancel",
+                    role: "cancel",
+                    handler: state.alertHandler,
+                  },
+                  {
+                    text: "Proceed",
+                    handler: () => {
+                      state.confirmHandler();
+                      setState({ isAlertVisible: false });
+                    },
+                  },
+                ]
+              : [
+                  {
+                    text: "OK",
+                    handler: () => {
+                      state.alertHandler();
+                      setState({ isAlertVisible: false });
+                    },
+                  },
+                ]
+          }
         />
       </IonContent>
     </IonPage>

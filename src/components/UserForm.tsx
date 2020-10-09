@@ -4,32 +4,40 @@ import {
   IonButton,
   IonButtons,
   IonCol,
+  IonContent,
   IonDatetime,
   IonGrid,
   IonHeader,
-  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonModal,
   IonRow,
-  IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 
 import { createUser } from "../services/userService";
+import { isValidEmail } from "../utils/validationUtils";
 
 interface UserFormProps {
+  users: User[];
   isUserFormVisible: boolean;
   setIsUserFormVisible: (status: boolean) => void;
   userCallback: () => void;
   loadingCallback: (status: boolean) => void;
-  alertCallback: (header: string, message: string, handler: () => void) => void;
+  alertCallback: (
+    header: string,
+    message: string,
+    hasConfirm: boolean,
+    confirmHandler: () => void
+  ) => void;
 }
 
 const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
   const {
+    users,
     isUserFormVisible,
     setIsUserFormVisible,
     userCallback,
@@ -39,7 +47,7 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [dob, setDob] = useState<string>(Date.now().toString());
+  const [dob, setDob] = useState<string | undefined>(undefined);
 
   const handleSubmit = async () => {
     loadingCallback(true);
@@ -47,8 +55,22 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      dob: new Date(dob).getTime(),
+      dob: new Date(dob!).getTime(),
     };
+    if (
+      users.filter((x) => {
+        return x.email === email;
+      }).length > 0
+    ) {
+      loadingCallback(false);
+      alertCallback(
+        "Notice",
+        "A user with the same email address has been found. Please try another email address.",
+        false,
+        () => {}
+      );
+      return;
+    }
     try {
       await createUser(userObject);
       userCallback();
@@ -57,18 +79,22 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
         alertCallback(
           "Success",
           `User ${firstName + " " + lastName} has been created successfully`,
-          () => {
-            userCallback();
-          }
+          false,
+          () => {}
         );
         setIsUserFormVisible(false);
+        userCallback();
       }, 500);
     } catch (error) {
       loadingCallback(false);
-      alertCallback("Error", error.message, () => {
-        userCallback();
-      });
+      alertCallback("Error", error.message, false, () => {});
     }
+  };
+
+  const validateInputs = () => {
+    return (
+      firstName.length > 0 && lastName.length > 0 && isValidEmail(email) && dob
+    );
   };
 
   return (
@@ -79,18 +105,15 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
     >
       <IonHeader>
         <IonToolbar>
+          <IonTitle>New User</IonTitle>
           <IonButtons slot='end'>
             <IonButton onClick={() => setIsUserFormVisible(false)}>
               Close
             </IonButton>
           </IonButtons>
         </IonToolbar>
-
-        <IonRow class='ion-padding-top ion-justify-content-center'>
-          <IonText style={{ fontWeight: "bold", fontSize: "32px" }}>
-            New User
-          </IonText>
-        </IonRow>
+      </IonHeader>
+      <IonContent>
         <IonGrid class='ion-padding-bottom ion-padding-horizontal'>
           <IonList>
             <IonItem>
@@ -116,7 +139,14 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
               />
             </IonItem>
             <IonItem>
-              <IonLabel color='primary' position='floating'>
+              <IonLabel
+                color={
+                  email.length > 0 && !isValidEmail(email)
+                    ? "danger"
+                    : "primary"
+                }
+                position='floating'
+              >
                 Email
               </IonLabel>
               <IonInput
@@ -132,7 +162,7 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
               </IonLabel>
               <IonDatetime
                 name='dob'
-                displayFormat='DD MMM YYYY'
+                displayFormat='DD MM YYYY'
                 value={dob}
                 onIonChange={(event: CustomEvent) => {
                   setDob(event.detail.value);
@@ -148,13 +178,14 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
                 color='primary'
                 shape='round'
                 onClick={handleSubmit}
+                disabled={!validateInputs()}
               >
                 Create User
               </IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonHeader>
+      </IonContent>
     </IonModal>
   );
 };

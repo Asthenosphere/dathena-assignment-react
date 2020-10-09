@@ -28,7 +28,12 @@ interface UserDetailsModalProps {
   setIsUserModalVisible: (status: boolean) => void;
   userCallback: () => void;
   loadingCallback: (status: boolean) => void;
-  alertCallback: (header: string, message: string, handler: () => void) => void;
+  alertCallback: (
+    header: string,
+    message: string,
+    hasConfirm: boolean,
+    confirmHandler: () => void
+  ) => void;
 }
 
 const UserModal: React.FC<UserDetailsModalProps> = (
@@ -52,24 +57,33 @@ const UserModal: React.FC<UserDetailsModalProps> = (
   );
 
   const handleDelete = () => {
-    loadingCallback(true);
-    try {
-      deleteUser(user.id!);
-      userCallback();
-      setTimeout(() => {
-        loadingCallback(false);
-        alertCallback(
-          "Success",
-          `User ${firstName + " " + lastName} has been deleted successfully`,
-          () => {
+    alertCallback(
+      "Notice",
+      "Are you sure you want delete this user?",
+      true,
+      () => {
+        loadingCallback(true);
+        try {
+          deleteUser(user.id!);
+          userCallback();
+          setTimeout(() => {
+            loadingCallback(false);
+            alertCallback(
+              "Success",
+              `User ${
+                firstName + " " + lastName
+              } has been deleted successfully`,
+              false,
+              () => {}
+            );
+            setIsUserModalVisible(false);
             userCallback();
-          }
-        );
-        setIsUserModalVisible(false);
-      }, 500);
-    } catch (error) {
-      console.log(error);
-    }
+          }, 500);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    );
   };
 
   const handleUpdate = () => {
@@ -88,10 +102,10 @@ const UserModal: React.FC<UserDetailsModalProps> = (
         alertCallback(
           "Success",
           `User ${firstName + " " + lastName} has been updated successfully`,
-          () => {
-            userCallback();
-          }
+          false,
+          () => {}
         );
+        userCallback();
       }, 500);
     } catch (error) {
       console.log(error);
