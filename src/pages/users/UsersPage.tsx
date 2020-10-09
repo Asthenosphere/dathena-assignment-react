@@ -12,6 +12,7 @@ import {
   IonLoading,
   IonMenuButton,
   IonPage,
+  IonSearchbar,
   IonText,
   IonTitle,
   IonToolbar,
@@ -38,6 +39,7 @@ interface UsersPageState {
   isUserModalVisible: boolean;
   isUserFormVisible: boolean;
   isLoading: boolean;
+  searchText: string;
 }
 
 const UsersPage: React.FC = () => {
@@ -62,6 +64,7 @@ const UsersPage: React.FC = () => {
       isUserModalVisible: false,
       isUserFormVisible: false,
       isLoading: true,
+      searchText: "",
     }
   );
 
@@ -109,6 +112,20 @@ const UsersPage: React.FC = () => {
     fetchData();
   }, []);
 
+  const filteredUsers =
+    state.searchText.length > 0
+      ? state.users.filter((x) => {
+          return (
+            x.firstName
+              .toLowerCase()
+              .indexOf(state.searchText.toLowerCase()) !== -1 ||
+            x.lastName.toLowerCase().indexOf(state.searchText.toLowerCase()) !==
+              -1 ||
+            x.email.toLowerCase().indexOf(state.searchText.toLowerCase()) !== -1
+          );
+        })
+      : state.users;
+
   return (
     <IonPage>
       <IonHeader>
@@ -126,6 +143,12 @@ const UsersPage: React.FC = () => {
             <IonTitle size='large'>Users</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonSearchbar
+          animated={true}
+          value={state.searchText}
+          onIonChange={(e): void => setState({ searchText: e.detail.value })}
+        />
+
         {state.currentUser && (
           <UserModal
             key={state.currentUser.id}
@@ -149,9 +172,9 @@ const UsersPage: React.FC = () => {
           loadingCallback={loadingCallback}
           alertCallback={alertCallback}
         />
-        {state.users.length > 0 ? (
-          <IonList>
-            {state.users.map((user, index) => {
+        {filteredUsers.length > 0 ? (
+          <IonList class='ion-no-padding'>
+            {filteredUsers.map((user, index) => {
               return (
                 <IonItem
                   key={index}

@@ -5,6 +5,7 @@ import { shallow, configure } from "enzyme";
 import UserForm from "../components/UserForm";
 
 import { User } from "../interfaces/User";
+import { IonButton, IonDatetime, IonInput } from "@ionic/react";
 
 configure({ adapter: new Adapter() });
 
@@ -18,8 +19,8 @@ const users: User[] = [
   },
 ];
 
-it("renders user form correctly", () => {
-  const form = shallow(
+describe("UserForm", () => {
+  const wrapper = shallow(
     <UserForm
       users={users}
       isUserFormVisible={true}
@@ -34,5 +35,20 @@ it("renders user form correctly", () => {
       ) => {}}
     />
   );
-  expect(form.getElements()).toMatchSnapshot();
+
+  it("renders user form correctly", () => {
+    expect(wrapper.getElements()).toMatchSnapshot();
+  });
+
+  it("renders three input fields correctly", () => {
+    expect(wrapper.find(IonInput).length).toEqual(3);
+  });
+
+  it("renders two buttons correctly", () => {
+    expect(wrapper.find(IonButton).length).toEqual(2);
+  });
+
+  it("renders a date picker correctly", () => {
+    expect(wrapper.find(IonDatetime).length).toEqual(1);
+  });
 });

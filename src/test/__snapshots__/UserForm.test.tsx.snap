@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders user form correctly 1`] = `
+exports[`UserForm renders user form correctly 1`] = `
 Array [
   <ForwardRef
     cssClass="modal"
@@ -25,7 +25,7 @@ Array [
     </ForwardRef(IonHeader)>
     <ForwardRef(IonContent)>
       <ForwardRef(IonGrid)
-        class="ion-padding-bottom ion-padding-horizontal"
+        class="ion-padding"
       >
         <ForwardRef(IonList)>
           <ForwardRef(IonItem)>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`users component should render users correctly 1`] = `
+exports[`UsersPage renders users correctly 1`] = `
 Array [
   <ForwardRef(IonPage)>
     <ForwardRef(IonHeader)>
@@ -57,7 +57,7 @@ Array [
         </ForwardRef(IonFabButton)>
       </ForwardRef(IonFab)>
       <ForwardRef
-        duration={5000}
+        duration={8000}
         isOpen={true}
         message="Loading..."
         onDidDismiss={[Function]}

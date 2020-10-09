@@ -6,6 +6,7 @@ import UserModal from "../components/UserModal";
 
 import { User } from "../interfaces/User";
 import { log } from "console";
+import { IonButton, IonDatetime, IonInput } from "@ionic/react";
 
 configure({ adapter: new Adapter() });
 
@@ -18,7 +19,7 @@ const user = {
 };
 
 describe("UserModal", () => {
-  const modal = shallow(
+  const wrapper = shallow(
     <UserModal
       user={user}
       isUserModalVisible={true}
@@ -35,11 +36,18 @@ describe("UserModal", () => {
   );
 
   it("renders user modal correctly", () => {
-    expect(modal.getElements()).toMatchSnapshot();
+    expect(wrapper.getElements()).toMatchSnapshot();
   });
 
-  it("should have an four fields", () => {
-    expect(modal).toBe(1);
-    expect(modal.find("ion-input").length).toEqual(4);
+  it("renders four buttons correctly", () => {
+    expect(wrapper.find(IonButton).length).toEqual(4);
+  });
+
+  it("renders three input fields", () => {
+    expect(wrapper.find(IonInput).length).toEqual(3);
+  });
+
+  it("renders a date picker correctly", () => {
+    expect(wrapper.find(IonDatetime).length).toEqual(1);
   });
 });

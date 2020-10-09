@@ -3,6 +3,7 @@
 exports[`UserModal renders user modal correctly 1`] = `
 Array [
   <ForwardRef
+    backdropDismiss={false}
     cssClass="modal"
     id="1"
     isOpen={true}
@@ -20,6 +21,8 @@ Array [
           </ForwardRef(IonButton)>
         </ForwardRef(IonButtons)>
       </ForwardRef(IonToolbar)>
+    </ForwardRef(IonHeader)>
+    <ForwardRef(IonContent)>
       <ForwardRef(IonRow)
         class="ion-padding ion-justify-content-center"
       >
@@ -41,6 +44,20 @@ Array [
         >
           John Doe
         </ForwardRef(IonText)>
+      </ForwardRef(IonRow)>
+      <ForwardRef(IonRow)
+        class="ion-justify-content-center ion-padding-bottom"
+      >
+        <ForwardRef(IonButton)
+          fill="outline"
+          mode="ios"
+          onClick={[Function]}
+          size="small"
+        >
+          <ForwardRef(IonIcon)
+            icon="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Pencil</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='44' d='M358.62 129.28L86.49 402.08 70 442l39.92-16.49 272.8-272.13-24.1-24.1zM413.07 74.84l-11.79 11.78 24.1 24.1 11.79-11.79a16.51 16.51 0 000-23.34l-.75-.75a16.51 16.51 0 00-23.35 0z' class='ionicon-fill-none'/></svg>"
+          />
+        </ForwardRef(IonButton)>
       </ForwardRef(IonRow)>
       <ForwardRef(IonItem)
         color="light"
@@ -74,7 +91,9 @@ Array [
               First Name
             </ForwardRef(IonLabel)>
             <ForwardRef(IonInput)
+              color="medium"
               onIonChange={[Function]}
+              readonly={true}
               value="John"
             />
           </ForwardRef(IonItem)>
@@ -86,7 +105,9 @@ Array [
               Last Name
             </ForwardRef(IonLabel)>
             <ForwardRef(IonInput)
+              color="medium"
               onIonChange={[Function]}
+              readonly={true}
               value="Doe"
             />
           </ForwardRef(IonItem)>
@@ -98,7 +119,9 @@ Array [
               Email
             </ForwardRef(IonLabel)>
             <ForwardRef(IonInput)
+              color="medium"
               onIonChange={[Function]}
+              readonly={true}
               value="john.doe@gmail.com"
             />
           </ForwardRef(IonItem)>
@@ -113,6 +136,12 @@ Array [
               displayFormat="DD MMM YYYY"
               name="dob"
               onIonChange={[Function]}
+              readonly={true}
+              style={
+                Object {
+                  "color": "#A0A1A8",
+                }
+              }
               value="Mon Jan 19 1970 18:41:33 GMT+0730 (Singapore Standard Time)"
             />
           </ForwardRef(IonItem)>
@@ -124,6 +153,7 @@ Array [
           <ForwardRef(IonCol)>
             <ForwardRef(IonButton)
               color="primary"
+              disabled={true}
               expand="block"
               onClick={[Function]}
               shape="round"
@@ -143,7 +173,7 @@ Array [
           </ForwardRef(IonCol)>
         </ForwardRef(IonRow)>
       </ForwardRef(IonGrid)>
-    </ForwardRef(IonHeader)>
+    </ForwardRef(IonContent)>
   </ForwardRef>,
 ]
 `;

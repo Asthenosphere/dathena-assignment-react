@@ -58,6 +58,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     user ? new Date(user.dob).toString() : Date.now().toString()
   );
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
 
   const handleDelete = () => {
     alertCallback(
@@ -81,7 +82,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
             );
             setIsUserModalVisible(false);
             userCallback();
-          }, 500);
+          }, 1000);
         } catch (error) {
           console.log(error);
         }
@@ -100,6 +101,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     try {
       updateUser(userObject, user.id.toString());
       userCallback();
+      setIsUpdated(true);
       setTimeout(() => {
         loadingCallback(false);
         alertCallback(
@@ -109,6 +111,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
           () => {}
         );
         userCallback();
+        setIsUpdated(true);
       }, 500);
     } catch (error) {
       console.log(error);
@@ -147,7 +150,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
           <IonButtons slot='end'>
             <IonButton
               onClick={() => {
-                if (validateChange()) {
+                if (validateChange() && !isUpdated) {
                   alertCallback(
                     "Notice",
                     "You have unsaved changes, are you sure you want to leave?",
@@ -158,6 +161,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
                       setEmail(user.email);
                       setDob(new Date(user.dob).toString());
                       setIsUserModalVisible(false);
+                      setIsUpdated(false);
                     }
                   );
                 } else {

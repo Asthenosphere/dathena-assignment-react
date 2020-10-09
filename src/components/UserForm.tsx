@@ -49,6 +49,13 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
   const [email, setEmail] = useState<string>("");
   const [dob, setDob] = useState<string | undefined>(undefined);
 
+  const resetInputs = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setDob("");
+  };
+
   const handleSubmit = async () => {
     loadingCallback(true);
     const userObject = {
@@ -82,9 +89,10 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
           false,
           () => {}
         );
+        resetInputs();
         setIsUserFormVisible(false);
         userCallback();
-      }, 500);
+      }, 1000);
     } catch (error) {
       loadingCallback(false);
       alertCallback("Error", error.message, false, () => {});
