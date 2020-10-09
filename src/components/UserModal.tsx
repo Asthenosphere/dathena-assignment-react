@@ -18,6 +18,7 @@ import {
   IonText,
   IonToolbar,
 } from "@ionic/react";
+import moment from "moment";
 
 import "./UserModal.scss";
 import { pencil } from "ionicons/icons";
@@ -38,6 +39,7 @@ interface UserDetailsModalProps {
   ) => void;
 }
 
+// Modal to display the user's details.
 const UserModal: React.FC<UserDetailsModalProps> = (
   props: UserDetailsModalProps
 ) => {
@@ -96,6 +98,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     );
   };
 
+  // Handle the delete action.
   const handleUpdate = async () => {
     loadingCallback(true);
     const userObject = {
@@ -126,6 +129,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     }
   };
 
+  // Checks if the user's inputs are valid.
   const validateInputs = () => {
     return (
       firstName.length > 0 &&
@@ -136,6 +140,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     );
   };
 
+  // Checks if the user has made any change to the details.
   const validateChange = () => {
     return (
       firstName !== user.firstName ||
@@ -277,6 +282,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
                 name='dob'
                 displayFormat='DD MMM YYYY'
                 readonly={!isEditing}
+                max={moment(new Date()).format("YYYY-MM-DD")}
                 style={!isEditing ? { color: "#A0A1A8" } : undefined}
                 value={dob}
                 onIonChange={(event: CustomEvent) => {
@@ -295,7 +301,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
                 disabled={!isEditing || !validateInputs() || !validateChange()}
                 onClick={handleUpdate}
               >
-                Update User
+                Save User
               </IonButton>
             </IonCol>
             <IonCol>

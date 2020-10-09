@@ -20,6 +20,7 @@ import {
 
 import { createUser } from "../services/userService";
 import { isValidEmail } from "../utils/validationUtils";
+import moment from "moment";
 
 interface UserFormProps {
   users: User[];
@@ -190,6 +191,7 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
                 name='dob'
                 displayFormat='DD MM YYYY'
                 value={dob}
+                max={moment(new Date()).format("YYYY-MM-DD")}
                 onIonChange={(event: CustomEvent) => {
                   setDob(event.detail.value);
                 }}
