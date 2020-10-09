@@ -194,7 +194,7 @@ const UsersPage: React.FC = () => {
             setState({ isLoading: false });
           }}
           message={"Loading..."}
-          duration={5000}
+          duration={8000}
           spinner='crescent'
         />
         <IonAlert

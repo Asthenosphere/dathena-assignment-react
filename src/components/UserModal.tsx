@@ -4,6 +4,7 @@ import {
   IonButton,
   IonButtons,
   IonCol,
+  IonContent,
   IonDatetime,
   IonGrid,
   IonHeader,
@@ -19,8 +20,9 @@ import {
 } from "@ionic/react";
 
 import "./UserModal.scss";
-import { documentTextOutline } from "ionicons/icons";
+import { documentTextOutline, pencil } from "ionicons/icons";
 import { deleteUser, updateUser } from "../services/userService";
+import { isValidEmail } from "../utils/validationUtils";
 
 interface UserDetailsModalProps {
   user: User;
@@ -55,6 +57,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
   const [dob, setDob] = useState<string>(
     user ? new Date(user.dob).toString() : Date.now().toString()
   );
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const handleDelete = () => {
     alertCallback(
@@ -112,21 +115,62 @@ const UserModal: React.FC<UserDetailsModalProps> = (
     }
   };
 
+  const validateInputs = () => {
+    return (
+      firstName.length > 0 && lastName.length > 0 && isValidEmail(email) && dob
+    );
+  };
+
+  const validateChange = () => {
+    return (
+      firstName !== user.firstName ||
+      lastName !== user.lastName ||
+      email !== user.email ||
+      Math.floor(new Date(dob).getTime() / 86400) !==
+        Math.floor(new Date(user.dob).getTime() / 86400)
+    );
+  };
+
   return (
     <IonModal
       cssClass='modal'
       isOpen={isUserModalVisible}
-      onDidDismiss={() => setIsUserModalVisible(false)}
+      backdropDismiss={false}
+      onDidDismiss={() => {
+        setIsUserModalVisible(false);
+        setIsEditing(false);
+      }}
       id={user.id.toString()}
     >
       <IonHeader>
         <IonToolbar>
           <IonButtons slot='end'>
-            <IonButton onClick={() => setIsUserModalVisible(false)}>
+            <IonButton
+              onClick={() => {
+                if (validateChange()) {
+                  alertCallback(
+                    "Notice",
+                    "You have unsaved changes, are you sure you want to leave?",
+                    true,
+                    () => {
+                      setFirstName(user.firstName);
+                      setLastName(user.lastName);
+                      setEmail(user.email);
+                      setDob(new Date(user.dob).toString());
+                      setIsUserModalVisible(false);
+                    }
+                  );
+                } else {
+                  setIsUserModalVisible(false);
+                }
+              }}
+            >
               Close
             </IonButton>
           </IonButtons>
         </IonToolbar>
+      </IonHeader>
+      <IonContent>
         <IonRow class='ion-padding ion-justify-content-center'>
           {user && user.lastName && <div id='circle'>{user.lastName[0]}</div>}
         </IonRow>
@@ -136,6 +180,18 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               {user.firstName + " " + user.lastName}
             </IonText>
           )}
+        </IonRow>
+        <IonRow class='ion-justify-content-center ion-padding-bottom'>
+          <IonButton
+            size='small'
+            mode='ios'
+            fill='outline'
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            <IonIcon icon={pencil} />
+          </IonButton>
         </IonRow>
         <IonItem color='light' lines='none'>
           <IonLabel>
@@ -151,6 +207,8 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               </IonLabel>
               <IonInput
                 value={firstName}
+                color={isEditing ? undefined : "medium"}
+                readonly={!isEditing}
                 onIonChange={(event: CustomEvent) => {
                   setFirstName(event.detail.value);
                 }}
@@ -162,6 +220,8 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               </IonLabel>
               <IonInput
                 value={lastName}
+                readonly={!isEditing}
+                color={isEditing ? undefined : "medium"}
                 onIonChange={(event: CustomEvent) => {
                   setLastName(event.detail.value);
                 }}
@@ -173,6 +233,8 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               </IonLabel>
               <IonInput
                 value={email}
+                readonly={!isEditing}
+                color={isEditing ? undefined : "medium"}
                 onIonChange={(event: CustomEvent) => {
                   setEmail(event.detail.value);
                 }}
@@ -185,6 +247,8 @@ const UserModal: React.FC<UserDetailsModalProps> = (
               <IonDatetime
                 name='dob'
                 displayFormat='DD MMM YYYY'
+                readonly={!isEditing}
+                style={!isEditing ? { color: "#A0A1A8" } : undefined}
                 value={dob}
                 onIonChange={(event: CustomEvent) => {
                   setDob(event.detail.value);
@@ -199,6 +263,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
                 expand='block'
                 color='primary'
                 shape='round'
+                disabled={!isEditing || !validateInputs() || !validateChange()}
                 onClick={handleUpdate}
               >
                 Update User
@@ -216,7 +281,7 @@ const UserModal: React.FC<UserDetailsModalProps> = (
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonHeader>
+      </IonContent>
     </IonModal>
   );
 };

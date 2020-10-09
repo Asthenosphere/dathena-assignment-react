@@ -114,7 +114,7 @@ const UserForm: React.FC<UserFormProps> = (props: UserFormProps) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid class='ion-padding-bottom ion-padding-horizontal'>
+        <IonGrid class='ion-padding'>
           <IonList>
             <IonItem>
               <IonLabel color='primary' position='floating'>
