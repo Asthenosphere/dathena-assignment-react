@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders user form correctly 1`] = `
+Array [
+  <ForwardRef
+    cssClass="modal"
+    isOpen={true}
+    onDidDismiss={[Function]}
+  >
+    <ForwardRef(IonHeader)>
+      <ForwardRef(IonToolbar)>
+        <ForwardRef(IonTitle)>
+          New User
+        </ForwardRef(IonTitle)>
+        <ForwardRef(IonButtons)
+          slot="end"
+        >
+          <ForwardRef(IonButton)
+            onClick={[Function]}
+          >
+            Close
+          </ForwardRef(IonButton)>
+        </ForwardRef(IonButtons)>
+      </ForwardRef(IonToolbar)>
+    </ForwardRef(IonHeader)>
+    <ForwardRef(IonContent)>
+      <ForwardRef(IonGrid)
+        class="ion-padding-bottom ion-padding-horizontal"
+      >
+        <ForwardRef(IonList)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              First Name
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value=""
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Last Name
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value=""
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Email
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value=""
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Date of Birth
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonDatetime)
+              displayFormat="DD MM YYYY"
+              name="dob"
+              onIonChange={[Function]}
+            />
+          </ForwardRef(IonItem)>
+        </ForwardRef(IonList)>
+        <br />
+        <ForwardRef(IonRow)
+          class="ion-padding"
+        >
+          <ForwardRef(IonCol)>
+            <ForwardRef(IonButton)
+              color="primary"
+              disabled={true}
+              expand="block"
+              onClick={[Function]}
+              shape="round"
+            >
+              Create User
+            </ForwardRef(IonButton)>
+          </ForwardRef(IonCol)>
+        </ForwardRef(IonRow)>
+      </ForwardRef(IonGrid)>
+    </ForwardRef(IonContent)>
+  </ForwardRef>,
+]
+`;

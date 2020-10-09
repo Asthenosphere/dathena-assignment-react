@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`users component should render users correctly 1`] = `
+Array [
+  <ForwardRef(IonPage)>
+    <ForwardRef(IonHeader)>
+      <ForwardRef(IonToolbar)>
+        <ForwardRef(IonButtons)
+          slot="start"
+        >
+          <ForwardRef(IonMenuButton) />
+        </ForwardRef(IonButtons)>
+        <ForwardRef(IonTitle)>
+          Users
+        </ForwardRef(IonTitle)>
+      </ForwardRef(IonToolbar)>
+    </ForwardRef(IonHeader)>
+    <ForwardRef(IonContent)
+      fullscreen={true}
+    >
+      <ForwardRef(IonHeader)
+        collapse="condense"
+      >
+        <ForwardRef(IonToolbar)>
+          <ForwardRef(IonTitle)
+            size="large"
+          >
+            Users
+          </ForwardRef(IonTitle)>
+        </ForwardRef(IonToolbar)>
+      </ForwardRef(IonHeader)>
+      <UserForm
+        alertCallback={[Function]}
+        isUserFormVisible={false}
+        loadingCallback={[Function]}
+        setIsUserFormVisible={[Function]}
+        userCallback={[Function]}
+        users={Array []}
+      />
+      <Container>
+        <ForwardRef(IonText)>
+          No users found
+        </ForwardRef(IonText)>
+      </Container>
+      <ForwardRef(IonFab)
+        horizontal="end"
+        slot="fixed"
+        vertical="bottom"
+      >
+        <ForwardRef(IonFabButton)
+          color="secondary"
+          onClick={[Function]}
+        >
+          <ForwardRef(IonIcon)
+            icon="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Add</title><path stroke-linecap='round' stroke-linejoin='round' d='M256 112v288M400 256H112' class='ionicon-fill-none ionicon-stroke-width'/></svg>"
+          />
+        </ForwardRef(IonFabButton)>
+      </ForwardRef(IonFab)>
+      <ForwardRef
+        duration={5000}
+        isOpen={true}
+        message="Loading..."
+        onDidDismiss={[Function]}
+        spinner="crescent"
+      />
+      <ForwardRef
+        backdropDismiss={false}
+        buttons={
+          Array [
+            Object {
+              "handler": [Function],
+              "text": "OK",
+            },
+          ]
+        }
+        header=""
+        isOpen={false}
+        message=""
+      />
+    </ForwardRef(IonContent)>
+  </ForwardRef(IonPage)>,
+]
+`;

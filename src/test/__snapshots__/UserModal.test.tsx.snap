@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserModal renders user modal correctly 1`] = `
+Array [
+  <ForwardRef
+    cssClass="modal"
+    id="1"
+    isOpen={true}
+    onDidDismiss={[Function]}
+  >
+    <ForwardRef(IonHeader)>
+      <ForwardRef(IonToolbar)>
+        <ForwardRef(IonButtons)
+          slot="end"
+        >
+          <ForwardRef(IonButton)
+            onClick={[Function]}
+          >
+            Close
+          </ForwardRef(IonButton)>
+        </ForwardRef(IonButtons)>
+      </ForwardRef(IonToolbar)>
+      <ForwardRef(IonRow)
+        class="ion-padding ion-justify-content-center"
+      >
+        <div
+          id="circle"
+        >
+          D
+        </div>
+      </ForwardRef(IonRow)>
+      <ForwardRef(IonRow)
+        class="ion-padding ion-justify-content-center"
+      >
+        <ForwardRef(IonText)
+          style={
+            Object {
+              "fontWeight": "bold",
+            }
+          }
+        >
+          John Doe
+        </ForwardRef(IonText)>
+      </ForwardRef(IonRow)>
+      <ForwardRef(IonItem)
+        color="light"
+        lines="none"
+      >
+        <ForwardRef(IonLabel)>
+          <ForwardRef(IonText)
+            style={
+              Object {
+                "fontWeight": "bold",
+              }
+            }
+          >
+            User Details
+          </ForwardRef(IonText)>
+        </ForwardRef(IonLabel)>
+        <ForwardRef(IonIcon)
+          icon="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Document Text</title><path d='M416 221.25V416a48 48 0 01-48 48H144a48 48 0 01-48-48V96a48 48 0 0148-48h98.75a32 32 0 0122.62 9.37l141.26 141.26a32 32 0 019.37 22.62z' stroke-linejoin='round' class='ionicon-fill-none ionicon-stroke-width'/><path d='M256 56v120a32 32 0 0032 32h120M176 288h160M176 368h160' stroke-linecap='round' stroke-linejoin='round' class='ionicon-fill-none ionicon-stroke-width'/></svg>"
+          slot="end"
+        />
+      </ForwardRef(IonItem)>
+      <ForwardRef(IonGrid)
+        class="ion-padding"
+      >
+        <ForwardRef(IonList)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              First Name
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value="John"
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Last Name
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value="Doe"
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Email
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonInput)
+              onIonChange={[Function]}
+              value="john.doe@gmail.com"
+            />
+          </ForwardRef(IonItem)>
+          <ForwardRef(IonItem)>
+            <ForwardRef(IonLabel)
+              color="primary"
+              position="floating"
+            >
+              Date of Birth
+            </ForwardRef(IonLabel)>
+            <ForwardRef(IonDatetime)
+              displayFormat="DD MMM YYYY"
+              name="dob"
+              onIonChange={[Function]}
+              value="Mon Jan 19 1970 18:41:33 GMT+0730 (Singapore Standard Time)"
+            />
+          </ForwardRef(IonItem)>
+        </ForwardRef(IonList)>
+        <br />
+        <ForwardRef(IonRow)
+          class="ion-padding"
+        >
+          <ForwardRef(IonCol)>
+            <ForwardRef(IonButton)
+              color="primary"
+              expand="block"
+              onClick={[Function]}
+              shape="round"
+            >
+              Update User
+            </ForwardRef(IonButton)>
+          </ForwardRef(IonCol)>
+          <ForwardRef(IonCol)>
+            <ForwardRef(IonButton)
+              color="danger"
+              expand="block"
+              onClick={[Function]}
+              shape="round"
+            >
+              Delete User
+            </ForwardRef(IonButton)>
+          </ForwardRef(IonCol)>
+        </ForwardRef(IonRow)>
+      </ForwardRef(IonGrid)>
+    </ForwardRef(IonHeader)>
+  </ForwardRef>,
+]
+`;

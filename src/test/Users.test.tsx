@@ -5,8 +5,9 @@ import { shallow, configure } from "enzyme";
 
 configure({ adapter: new Adapter() });
 
-describe("users", () => {
+describe("users component", () => {
   it("should render users correctly", () => {
-    const wrapper = shallow(<UsersPage />);
+    const component = shallow(<UsersPage />);
+    expect(component.getElements()).toMatchSnapshot();
   });
 });
