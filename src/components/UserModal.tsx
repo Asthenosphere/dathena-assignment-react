@@ -197,9 +197,9 @@ const UserModal: React.FC<UserDetailsModalProps> = (
           <IonButton
             size='small'
             mode='ios'
-            fill='outline'
+            fill={isEditing ? "outline" : "solid"}
             onClick={() => {
-              setIsEditing(true);
+              setIsEditing(!isEditing);
             }}
           >
             <IonIcon icon={pencil} />
