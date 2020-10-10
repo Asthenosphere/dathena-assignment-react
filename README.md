@@ -63,3 +63,7 @@ However, due to the uncertain speed of making an API call to the [API server](ht
 When in users list page, there is a round button at the bottom right of the window with a plus sign on it. Upon clicking, a new user form will appear and you may use this form to fill in the credentials of a new user. Note that the email field cannot be duplicated (i.e. the email of the new user cannot be the same as any existing user). Also, all fields in this form are compulsory. There is also checks against the validity of email.
 
 Upon successful submission, the new user will be saved to the database and it should appear on the users list.
+
+### Searching for users
+
+When in users list page, you may type keywords into the search bar to search for users. The search is based on matching of entered keywords with the first name and last name of all the users.

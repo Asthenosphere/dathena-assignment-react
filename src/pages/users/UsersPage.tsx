@@ -119,7 +119,7 @@ const UsersPage: React.FC = () => {
   }, []);
 
   // Filtered list of users based on search text entered.
-  // The matching is based on the matching of keywords present in first name, last name and email.
+  // The matching is based on the matching of keywords present in first name and last name.
   const filteredUsers =
     state.searchText.length > 0
       ? state.users.filter((x) => {
@@ -128,8 +128,7 @@ const UsersPage: React.FC = () => {
               .toLowerCase()
               .indexOf(state.searchText.toLowerCase()) !== -1 ||
             x.lastName.toLowerCase().indexOf(state.searchText.toLowerCase()) !==
-              -1 ||
-            x.email.toLowerCase().indexOf(state.searchText.toLowerCase()) !== -1
+              -1
           );
         })
       : state.users;
